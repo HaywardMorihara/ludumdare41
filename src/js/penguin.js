@@ -2,6 +2,7 @@ var penguinSpeed = 200;
 
 function initializePenguin(game) {
 	var penguin = game.add.sprite(300, 300, 'penguin');
+    penguin.scale.setTo(.5,.5);
 	game.physics.enable(penguin, Phaser.Physics.ARCADE);
 	penguin.body.collideWorldBounds = true;
 	return penguin;
