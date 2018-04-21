@@ -24,7 +24,7 @@
         var rightKey;
 
         function create() {
-
+            game.physics.startSystem(Phaser.Physics.ARCADE);
             game.stage.backgroundColor = '#736357';
 
             player = game.add.sprite(300, 300, 'player');
@@ -36,26 +36,28 @@
             leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
             rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 
+            game.physics.enable(player, Phaser.Physics.ARCADE);
+            player.body.collideWorldBounds = true;
         }
 
         function update() {
 
             if (upKey.isDown)
             {
-                player.y--;
+                player.y = player.y - 10;
             }
             else if (downKey.isDown)
             {
-                player.y++;
+                player.y = player.y + 10;
             }
 
             if (leftKey.isDown)
             {
-                player.x--;
+                player.x = player.x - 10;
             }
             else if (rightKey.isDown)
             {
-                player.x++;
+                player.x = player.x + 10;
             }
 
             enemy.x--;
