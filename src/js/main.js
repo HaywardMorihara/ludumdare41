@@ -1,22 +1,23 @@
-var game = new Phaser.Game(1200, 600, Phaser.AUTO, 'penguin-defense', { preload: preload, create: create, update: update, render: render });
+var PhaserGame = new Phaser.Game(1200, 600, Phaser.AUTO, 'penguin-defense', 
+    { preload: preload, create: create, update: update, render: render });
 
 function preload() {
-    game.load.spritesheet('penguin', 'assets/sprites/penguin-front.png', 200, 200);
-    game.load.image('nest', 'assets/static/nest.png');
-    game.load.image('egg', 'assets/static/diamond.png');
-    game.load.image('enemy', 'assets/sprites/phaser-dude.png');
+    PhaserGame.load.spritesheet('penguin', 'assets/sprites/penguin-front.png', 200, 200);
+    PhaserGame.load.image('nest', 'assets/static/nest.png');
+    PhaserGame.load.image('egg', 'assets/static/diamond.png');
+    PhaserGame.load.image('enemy', 'assets/sprites/phaser-dude.png');
 }
 
 function create() {
-    initializeGame(game);
+    Game.init();
 }
 
 function update() {
-    updateGame(game);
+    Game.update();
 }
 
 function render() {
     if (true) {
-        debug(game);
+        Game.debug();
     }
 }

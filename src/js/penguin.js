@@ -1,46 +1,54 @@
-var penguinSpeed = 200;
+Penguin = function() {
+    var penguinSpeed = 200;
 
-function initializePenguin(game) {
-	var penguin = game.add.sprite(300, 300, 'penguin');
-    var walk = penguin.animations.add('walk')
-    penguin.scale.setTo(.35,.35);
-	game.physics.enable(penguin, Phaser.Physics.ARCADE);
-	penguin.body.collideWorldBounds = true;
+    function init() {
+        var penguin = PhaserGame.add.sprite(300, 300, 'penguin');
+        var walk = penguin.animations.add('walk')
+        penguin.scale.setTo(.35,.35);
+        PhaserGame.physics.enable(penguin, Phaser.Physics.ARCADE);
+        penguin.body.collideWorldBounds = true;
 
-	return penguin;
-}
-
-function updatePenguin(penguin) {
-    if (upKey.isDown)
-    {
-        penguin.body.velocity.y = -penguinSpeed;
-    }
-    else if (downKey.isDown)
-    {
-        penguin.body.velocity.y = penguinSpeed;
-    } else 
-    {
-        penguin.body.velocity.y = 0;
+        return penguin;
     }
 
-    if (leftKey.isDown)
-    {
-        penguin.body.velocity.x = -penguinSpeed;
+    function update(penguin) {
+        if (upKey.isDown)
+        {
+            penguin.body.velocity.y = -penguinSpeed;
+        }
+        else if (downKey.isDown)
+        {
+            penguin.body.velocity.y = penguinSpeed;
+        } else 
+        {
+            penguin.body.velocity.y = 0;
+        }
+
+        if (leftKey.isDown)
+        {
+            penguin.body.velocity.x = -penguinSpeed;
+        }
+        else if (rightKey.isDown)
+        {
+            penguin.body.velocity.x = penguinSpeed; 
+        } else 
+        {
+            penguin.body.velocity.x = 0;
+        }
+
+        penguin.animations.play('walk', 6, true)
+        
     }
-    else if (rightKey.isDown)
-    {
-        penguin.body.velocity.x = penguinSpeed; 
-    } else 
-    {
-        penguin.body.velocity.x = 0;
+
+    function debug(penguin) {
+        // PhaserGame.debug.body(penguin);
+
+     //    PhaserGame.debug.bodyInfo(penguin, 32, 32);
     }
 
-    penguin.animations.play('walk', 6, true)
-	
-}
-
-function debugPenguin(game, penguin) {
-	// game.debug.body(penguin);
-
- //    game.debug.bodyInfo(penguin, 32, 32);
-}
+    return {
+        init: init,
+        update: update,
+        debug: debug
+    }
+}();
