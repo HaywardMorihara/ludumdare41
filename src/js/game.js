@@ -18,7 +18,7 @@ var lives;
 var livesText;
 
 function initializeGame(game) {
-	game.stage.backgroundColor = '#736357';
+	game.stage.backgroundColor = '#fcfcff';
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //initialize stats
