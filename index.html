@@ -11,12 +11,12 @@
         var game = new Phaser.Game(800, 600, Phaser.AUTO, 'penguin-defense', { preload: preload, create: create, update: update });
 
         function preload() {
-
-            game.load.image('phaser', 'assets/sprites/phaser-dude.png');
-
+            game.load.image('player', 'assets/sprites/phaser-dude.png');
         }
 
-        var sprite;
+        var player;
+
+        var enemy;
 
         var upKey;
         var downKey;
@@ -27,9 +27,9 @@
 
             game.stage.backgroundColor = '#736357';
 
-            sprite = game.add.sprite(300, 300, 'phaser');
+            player = game.add.sprite(300, 300, 'player');
 
-            //  In this example we'll create 4 specific keys (up, down, left, right) and monitor them in our update function
+            enemy = game.add.sprite(800, 300, 'player');
 
             upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
             downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -42,21 +42,23 @@
 
             if (upKey.isDown)
             {
-                sprite.y--;
+                player.y--;
             }
             else if (downKey.isDown)
             {
-                sprite.y++;
+                player.y++;
             }
 
             if (leftKey.isDown)
             {
-                sprite.x--;
+                player.x--;
             }
             else if (rightKey.isDown)
             {
-                sprite.x++;
+                player.x++;
             }
+
+            enemy.x--;
 
         }
 
