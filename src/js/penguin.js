@@ -12,11 +12,11 @@ Penguin = function() {
     }
 
     function update(penguin) {
-        if (upKey.isDown)
+        if (Controller.upKey.isDown)
         {
             penguin.body.velocity.y = -penguinSpeed;
         }
-        else if (downKey.isDown)
+        else if (Controller.downKey.isDown)
         {
             penguin.body.velocity.y = penguinSpeed;
         } else 
@@ -24,11 +24,11 @@ Penguin = function() {
             penguin.body.velocity.y = 0;
         }
 
-        if (leftKey.isDown)
+        if (Controller.leftKey.isDown)
         {
             penguin.body.velocity.x = -penguinSpeed;
         }
-        else if (rightKey.isDown)
+        else if (Controller.rightKey.isDown)
         {
             penguin.body.velocity.x = penguinSpeed; 
         } else 
