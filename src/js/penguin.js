@@ -2,9 +2,11 @@ var penguinSpeed = 200;
 
 function initializePenguin(game) {
 	var penguin = game.add.sprite(300, 300, 'penguin');
+    var walk = penguin.animations.add('walk')
     penguin.scale.setTo(.5,.5);
 	game.physics.enable(penguin, Phaser.Physics.ARCADE);
 	penguin.body.collideWorldBounds = true;
+
 	return penguin;
 }
 
@@ -32,11 +34,13 @@ function updatePenguin(penguin) {
     {
         penguin.body.velocity.x = 0;
     }
+
+    penguin.animations.play('walk', 6, true)
 	
 }
 
 function debugPenguin(game, penguin) {
-	game.debug.body(penguin);
+	// game.debug.body(penguin);
 
-    game.debug.bodyInfo(penguin, 32, 32);
+ //    game.debug.bodyInfo(penguin, 32, 32);
 }
