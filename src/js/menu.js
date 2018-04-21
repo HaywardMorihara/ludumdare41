@@ -1,3 +1,5 @@
-function initializeMenu() {
-	
-}
+Menu = function() {
+	return {
+
+	}
+}();

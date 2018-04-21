@@ -1,62 +1,71 @@
-//movable game objects
-var penguin;
-var enemy;
+Game = function() {
 
-//static game objects
-var nestGroup;
-var egg;
-var nest;
+    //movable PhaserGame objects
+    var penguin;
+    var enemy;
 
-//keys
-var upKey;
-var downKey;
-var leftKey;
-var rightKey;
+    //static PhaserGame objects
+    var nestGroup;
+    var egg;
+    var nest;
 
-//stats
-var lives;
-var livesText;
+    //stats
+    var lives;
+    var livesText;
 
-function initializeGame(game) {
-	game.stage.backgroundColor = '#fcfcff';
-	game.physics.startSystem(Phaser.Physics.ARCADE);
+    //By not having them declared here, they're global.....WILL REFACTOR THIS
+    // var upKey;
+    // var downKey;
+    // var leftKey;
+    // var rightKey;
 
-    //initialize stats
-    lives = 3;
-    livesText = game.add.text(16, 16, 'lives: ' + lives, { fontSize: '32px', fill: '#000' });
+    function init() {
+        PhaserGame.stage.backgroundColor = '#fcfcff';
+        PhaserGame.physics.startSystem(Phaser.Physics.ARCADE);
 
-    //initialize static game objects
-    nestGroup = initializeNestGroup(game, lives);
+        //initialize stats
+        lives = 3;
+        livesText = PhaserGame.add.text(16, 16, 'lives: ' + lives, { fontSize: '32px', fill: '#000' });
 
-    //initialize players
-	penguin = initializePenguin(game);
-    enemy = initializeEnemy(game);
+        //initialize static PhaserGame objects
+        nestGroup = NestGroup.init(lives);
 
-    //initialize keystrokes
-    upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-    leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-}
+        //initialize players
+        penguin = Penguin.init();
+        enemy = Enemy.init();
 
-function updateGame(game) {
-	updatePenguin(penguin);
+        upKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.UP);
+        downKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+        leftKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        rightKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    }
 
-    updateEnemy(enemy);
+    function update() {
+        Penguin.update(penguin);
 
-    game.physics.arcade.collide(penguin, enemy);
-    game.physics.arcade.overlap(enemy, nestGroup, loseLife, null, this);
-}
+        Enemy.update(enemy);
+
+        PhaserGame.physics.arcade.collide(penguin, enemy);
+        PhaserGame.physics.arcade.overlap(enemy, nestGroup, loseLife, null, this);
+    }
 
 
 
-function debug(game) {
-	debugPenguin(game, penguin);
+    function debug() {
+        Penguin.debug(PhaserGame, penguin);
 
-	debugEnemy(game, enemy);
-}
+        Enemy.debug(PhaserGame, enemy);
+    }
 
-function loseLife(enemy, nestGroup) {
-    enemy.kill();
-    livesText.text = 'lives: ' + --lives;
-}
+    function loseLife(enemy, nestGroup) {
+        enemy.kill();
+        livesText.text = 'lives: ' + --lives;
+    }
+
+    return {
+        init: init,
+        update: update,
+        debug: debug
+    }
+}();
+
