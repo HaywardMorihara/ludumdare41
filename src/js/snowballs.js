@@ -33,7 +33,9 @@ Snowballs = function() {
 
     function collisionHandler(snowball, enemy) {
         snowball.kill();
-        enemy.kill();
+        enemy.animations.add('flop', [0]);
+        enemy.animations.play('flop', 5, false, true);
+
     }
 
     function debug(snowball) {

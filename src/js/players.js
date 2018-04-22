@@ -18,6 +18,7 @@ Players = function() {
                 var player = playerGroup.create(i*300, 300, 'penguin-pink');
             }
             
+            player.playerNumber = i + 1;
 
             var player_back_walk = player.animations.add('player_back_walk', [0,1,2,3]);
             var player_front_walk = player.animations.add('player_front_walk', [4,5,6,7]);
@@ -41,41 +42,41 @@ Players = function() {
 
     function update(playerGroup, snowballGroup) {
         playerGroup.forEach(function(player) {
-            if (Controller.upKey.isDown)
+            if (Controller.upKey.isDown || Controller.gamePads.axis(GamePads[player.playerNumber].UD) < -0.3)
             {
                 player.body.velocity.y = -playerSpeed;
-                player.animations.play('player_back_walk', 6, true);
+                player.animations.play('player_back_walk', 20, true);
                 player.direction = DirectionEnum.UP;
             }
-            else if (Controller.downKey.isDown)
+            else if (Controller.downKey.isDown || Controller.gamePads.axis(GamePads[player.playerNumber].UD) > 0.3)
             {
                 player.body.velocity.y = playerSpeed;
-                player.animations.play('player_front_walk', 6, true);
+                player.animations.play('player_front_walk', 20, true);
                 player.direction = DirectionEnum.DOWN;
             } else 
             {
                 player.body.velocity.y = 0;
             }
 
-            if (Controller.leftKey.isDown)
+            if (Controller.leftKey.isDown|| Controller.gamePads.axis(GamePads[player.playerNumber].LR) < -0.3)
             {
                 if(player.x_direction == DirectionEnum.RIGHT)
                 {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = -playerSpeed;
-                player.animations.play('player_side_walk', 6, true);
+                player.animations.play('player_side_walk', 20, true);
                 player.x_direction = DirectionEnum.LEFT;
                 player.direction = player.x_direction;
             }
-            else if (Controller.rightKey.isDown)
+            else if (Controller.rightKey.isDown || Controller.gamePads.axis(GamePads[player.playerNumber].LR) > 0.3)
             {
                 if(player.x_direction == DirectionEnum.LEFT)
                 {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = playerSpeed; 
-                player.animations.play('player_side_walk', 6, true);
+                player.animations.play('player_side_walk', 20, true);
                 player.x_direction = DirectionEnum.RIGHT;
                 player.direction = player.x_direction;
             } else 
@@ -83,8 +84,12 @@ Players = function() {
                 player.body.velocity.x = 0;
             }
 
+            if (player.body.velocity.x == 0 && player.body.velocity.y == 0) {
+                player.animations.stop(null, true);
+            }
+
             //allow player to throw once every second
-            if (Controller.spaceKey.isDown){
+            if (Controller.spaceKey.isDown || Controller.gamePads.isDown(GamePads[player.playerNumber].A)){
                 if (player.hasSnowball){
                     Snowballs.throwSnowball(player, player.direction, snowballGroup);
                     player.hasSnowball = false;
