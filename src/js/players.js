@@ -7,7 +7,16 @@ Players = function() {
         PhaserGame.physics.enable(playerGroup, Phaser.Physics.ARCADE);
 
         for (i = 0; i < numberOfPlayers; i++) {
-            var player = playerGroup.create(i*300, 300, 'penguin');
+            if (i == 0) {
+                var player = playerGroup.create(i*300, 300, 'penguin-black');
+            } else if (i == 1) {
+                var player = playerGroup.create(i*300, 300, 'penguin-orange');
+            } else if (i == 2) {
+                var player = playerGroup.create(i*300, 300, 'penguin-blue');
+            } else {
+                var player = playerGroup.create(i*300, 300, 'penguin-pink');
+            }
+            
 
             var player_back_walk = player.animations.add('player_back_walk', [0,1,2,3]);
             var player_front_walk = player.animations.add('player_front_walk', [4,5,6,7]);
