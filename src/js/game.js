@@ -50,7 +50,7 @@ Game = function() {
 
 
         if (lives <= 0) {
-            lose();
+            //lose();
         }
 
         if (Mating.mated(players, iglooGroup)) {
@@ -83,6 +83,7 @@ Game = function() {
         nestGroup.destroy();
         livesText.destroy();
         iglooGroup.destroy();
+        Snowballs.snowballGroup.destroy();
 
         Enemies.destroySpawnEvent();
     }
