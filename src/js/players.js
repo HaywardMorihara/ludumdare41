@@ -1,6 +1,5 @@
 Players = function() {
     var playerSpeed = 200;
-    var createSnowballEvent;
 
     function init(numberOfPlayers) {
         var playerGroup = PhaserGame.add.group();
@@ -32,15 +31,16 @@ Players = function() {
             player.scale.setTo(.35,.35);
             player.anchor.setTo(.5,.5);
 
-            player.hasSnowball = true;
-            createSnowballEvent = PhaserGame.time.events.loop(Phaser.Timer.SECOND * 0.5, createSnowball, this, player);
-            console.log(createSnowballEvent);
+            player.snowBallProgress = 0;
+            player.hasSnowball = false;
+
+            addButtons(player);
         }
 
         return playerGroup;
     }
 
-    function update(playerGroup, snowballGroup) {
+    function update(playerGroup) {
         playerGroup.forEach(function(player) {
             if (Controller.upKey.isDown || Controller.gamePads.axis(GamePads[player.playerNumber].UD) < -0.3)
             {
@@ -88,18 +88,38 @@ Players = function() {
                 player.animations.stop(null, true);
             }
 
-            //allow player to throw once every second
             if (Controller.spaceKey.isDown || Controller.gamePads.isDown(GamePads[player.playerNumber].A)){
                 if (player.hasSnowball){
-                    Snowballs.throwSnowball(player, player.direction, snowballGroup);
+                    Snowballs.throwSnowball(player, player.direction);
                     player.hasSnowball = false;
                 }
             }
+
+            //Update Snowball being held
+            if (player.snowball != null) {
+                player.snowball.x = player.x;
+                player.snowball.y = player.y;
+            }
+
         })
     }
 
-    function createSnowball(player) {
-        player.hasSnowball = true;
+    function addButtons(player) {
+        //Snowball Throwing
+        var buttonB = Controller.gamePads.getButton(GamePads[player.playerNumber].B);
+        buttonB.onUp.add(function(){ return buildSnowball(player); }, this);
+        Controller.bKey.onUp.add(function(){ return buildSnowball(player); });
+    }
+
+    function buildSnowball(player) {
+        if(!player.hasSnowball) {
+            player.snowBallProgress = player.snowBallProgress + 10;
+            if (player.snowBallProgress >= 50) {
+                player.snowBallProgress = 0;
+                player.hasSnowball = true;
+                Snowballs.createSnowball(player);
+            }
+        }
     }
 
     function debug(player) {
@@ -111,7 +131,6 @@ Players = function() {
     return {
         init: init,
         update: update,
-        createSnowball: createSnowball,
         debug: debug
     }
 }();

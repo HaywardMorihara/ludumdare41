@@ -1,34 +1,41 @@
 Snowballs = function() {
+
+    var snowBallGroup;
+
     var snowballSpeed = 400;
 
     function init() {
-        var snowballGroup = PhaserGame.add.group();
-        snowballGroup.enableBody = true;
-        PhaserGame.physics.enable(snowballGroup, Phaser.Physics.ARCADE);
-        return snowballGroup;
+        this.snowballGroup = PhaserGame.add.group();
+        this.snowballGroup.enableBody = true;
+        PhaserGame.physics.enable(this.snowballGroup, Phaser.Physics.ARCADE);
+        return this.snowballGroup;
     }
 
-    function throwSnowball(player, direction, snowballGroup) { 
-        var snowball = snowballGroup.create(player.body.x, player.body.y, 'snowball');
-        snowball.scale.setTo(.5,.5);
+    function createSnowball(player) {
+        player.snowball = this.snowballGroup.create(player.body.x, player.body.y, 'snowball');
+        player.snowball.scale.setTo(.5,.5);
+    }
 
+    function throwSnowball(player, direction) { 
         if (direction == DirectionEnum.UP) {
-            snowball.body.velocity.y = -snowballSpeed;
+            player.snowball.body.velocity.y = -snowballSpeed;
         } else if (direction == DirectionEnum.DOWN) {
-            snowball.body.velocity.y = snowballSpeed;
+            player.snowball.body.velocity.y = snowballSpeed;
         } else if (direction == DirectionEnum.LEFT) {
-            snowball.body.velocity.x = -snowballSpeed;
+            player.snowball.body.velocity.x = -snowballSpeed;
         } else if (direction == DirectionEnum.RIGHT) {
-            snowball.body.velocity.x = snowballSpeed;
+            player.snowball.body.velocity.x = snowballSpeed;
         }
         else {
-            snowball.body.velocity.y = -snowballSpeed;
+            player.snowball.body.velocity.y = -snowballSpeed;
         }
+
+        player.snowball = null;
     }
 
 
-    function update(snowballGroup, enemyGroup) {
-        PhaserGame.physics.arcade.overlap(snowballGroup, enemyGroup, collisionHandler, null, this);
+    function update(enemyGroup) {
+        PhaserGame.physics.arcade.overlap(this.snowballGroup, enemyGroup, collisionHandler, null, this);
     }
 
     function collisionHandler(snowball, enemy) {
@@ -45,7 +52,9 @@ Snowballs = function() {
     }
 
     return {
+        snowballGroup: snowBallGroup,
         init: init,
+        createSnowball: createSnowball,
         throwSnowball: throwSnowball,
         update: update,
         debug: debug
