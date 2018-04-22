@@ -7,6 +7,8 @@ Controller = function() {
 	var spaceKey;
 	var enterKey;
 
+	var gamePads;
+
 	function init() {
         this.upKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.UP);
         this.downKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -14,6 +16,9 @@ Controller = function() {
         this.rightKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         this.spaceKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.enterKey = PhaserGame.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+
+        PhaserGame.input.gamepad.start();
+	    this.gamePads = PhaserGame.input.gamepad.pad1;
     }
 
 	return {
@@ -23,6 +28,7 @@ Controller = function() {
 		rightKey: rightKey,
 		spaceKey: spaceKey,
 		enterKey: enterKey,
+		gamePads: gamePads,
 		init: init
 	}
 }();
