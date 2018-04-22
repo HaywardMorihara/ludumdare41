@@ -49,6 +49,7 @@ Menu = function() {
 				cursorSelection = cursorSelection - 1;
 				updateCursorLocation();
 			}
+			console.log("Up");
 		});
 		Controller.downKey.onUp.add(function() {
 			if (cursorSelection < CursorSelection.FOUR_PLAYERS) {
@@ -59,7 +60,7 @@ Menu = function() {
 		Controller.enterKey.onUp.add(function() {
 			destroyAll();
 			Main.state = State.GAME;
-			Game.init();
+			Game.init(cursorSelection + 1);
 		})
 	}
 
@@ -86,6 +87,10 @@ Menu = function() {
 		twoPlayers.destroy();
 		threePlayers.destroy();
 		fourPlayers.destroy();
+
+		Controller.upKey.onUp.removeAll();
+		Controller.downKey.onUp.removeAll();
+		Controller.enterKey.onUp.removeAll();
 	}
 
 	return {
