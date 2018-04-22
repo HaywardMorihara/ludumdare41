@@ -17,6 +17,9 @@ Menu = function() {
 	  FOUR_PLAYERS: 3
 	};
 
+	var debugController = true;
+	var debugControllerText = [];
+
 	function init() {
 		PhaserGame.stage.backgroundColor = '#000000';
 
@@ -63,6 +66,16 @@ Menu = function() {
 			Main.state = State.GAME;
 			Game.init(cursorSelection + 1);
 		})
+
+		if (debugController) {
+			var debugControllerTextStyle = { font: "bold 8px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+			for (var i = 0; i < 50; i++) {
+				debugControllerText.push(PhaserGame.add.text(0,i*10,"input: "+i,debugControllerTextStyle));
+	    	}
+	    	for (var i = 50; i < 100; i++) {
+				debugControllerText.push(PhaserGame.add.text(100,(i-50)*10,"input: "+i,debugControllerTextStyle));
+	    	}
+		}
 	}
 
 	function updateCursorLocation() {
@@ -79,6 +92,10 @@ Menu = function() {
 
 	function update() {
 		cursor.animations.play('walk', 6, true);
+
+		if (debugController) {
+			debug();
+		}
 	}
 
 	function destroyAll() {
@@ -92,6 +109,12 @@ Menu = function() {
 		Controller.upKey.onUp.removeAll();
 		Controller.downKey.onUp.removeAll();
 		Controller.enterKey.onUp.removeAll();
+	}
+
+	function debug() {
+		for (var i = 0; i < debugControllerText.length; i++) {
+    		debugControllerText[i].setText("input: "+i+" is "+Controller.gamePads.isDown(i) + " or " + Controller.gamePads.axis(i));
+    	}
 	}
 
 	return {
