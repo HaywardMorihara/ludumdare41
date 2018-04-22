@@ -1,9 +1,9 @@
 Game = function() {
 
     //movable PhaserGame objects
-    var penguin;
-    var enemy;
-    var snowball;
+    var players;
+    var enemies;
+
 
     //static PhaserGame objects
     var nestGroup;
@@ -14,7 +14,7 @@ Game = function() {
     var lives;
     var livesText;
 
-    function init() {
+    function init(numberOfPlayers) {
         PhaserGame.stage.backgroundColor = '#fcfcff';
         PhaserGame.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -25,26 +25,27 @@ Game = function() {
         //initialize static PhaserGame objects
         nestGroup = NestGroup.init(lives);
 
-        //initialize players
-        penguin = Penguin.init();
-        enemy = Enemy.init();
+        players = Players.init(numberOfPlayers);
+
+        enemies = Enemies.init();
     }
 
     function update() {
-        Penguin.update(penguin);
+        Players.update(players);
 
-        Enemy.update(enemy);
+        Enemies.update(enemies);
 
-        PhaserGame.physics.arcade.collide(penguin, enemy);
-        PhaserGame.physics.arcade.collide(snowball, enemy);
-        PhaserGame.physics.arcade.overlap(enemy, nestGroup, loseLife, null, this);
+
+        PhaserGame.physics.arcade.collide(players, enemies);
+        PhaserGame.physics.arcade.collide(players);
+        PhaserGame.physics.arcade.overlap(enemies, nestGroup, loseLife, null, this);
     }
 
-
-
     function debug() {
-        Penguin.debug(PhaserGame, penguin);
-        Enemy.debug(PhaserGame, enemy);
+
+        //players.debug(PhaserGame, player);
+
+        Enemies.debug(PhaserGame, enemies);
     }
 
     function loseLife(enemy, nestGroup) {

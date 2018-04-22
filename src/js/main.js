@@ -32,7 +32,7 @@ function create() {
     if (Main.state == State.MENU) {
         Menu.init();
     } else if (Main.state == State.GAME) {
-        Game.init();
+        Game.init(1);
     } 
 }
 

@@ -1,7 +1,7 @@
 Snowball = function() {
 
-    function init(penguin, direction) {
-        var snowball = PhaserGame.add.sprite(penguin.body.x, penguin.body.y, 'snowball');
+    function init(player, direction) {
+        var snowball = PhaserGame.add.sprite(player.body.x, player.body.y, 'snowball');
         snowball.scale.setTo(.5,.5);
         PhaserGame.physics.enable(snowball, Phaser.Physics.ARCADE);
 

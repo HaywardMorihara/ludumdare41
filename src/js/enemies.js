@@ -1,4 +1,4 @@
-Enemy = function() {
+Enemies = function() {
 	function init() {
 		//could be changed based on difficulty
 		var timeParam = 1;
@@ -36,9 +36,9 @@ Enemy = function() {
         var enemy = enemyGroup.create(x, y, 'enemy');
 	}
 
-	function debug(enemy) {
-	    PhaserGame.debug.body(enemy);
-	    PhaserGame.debug.bodyInfo(enemy, 32, 150);
+	function debug(enemies) {
+	    PhaserGame.debug.body(enemies);
+	    PhaserGame.debug.bodyInfo(enemies, 32, 150);
 	}
 
 	return {
