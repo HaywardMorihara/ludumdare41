@@ -39,6 +39,10 @@ Game = function() {
         PhaserGame.physics.arcade.collide(players, enemies);
         PhaserGame.physics.arcade.collide(players);
         PhaserGame.physics.arcade.overlap(enemies, nestGroup, loseLife, null, this);
+
+        if (lives <= 0) {
+            lose();
+        }
     }
 
     function debug() {
@@ -51,6 +55,21 @@ Game = function() {
     function loseLife(enemy, nestGroup) {
         enemy.kill();
         livesText.text = 'lives: ' + --lives;
+    }
+
+    function lose() {
+        Main.state = State.MENU;
+        Menu.init();
+        destroyAll();
+    }
+
+    function destroyAll() {
+        players.destroy();
+        enemies.destroy();
+        nestGroup.destroy();
+        livesText.destroy();
+
+        Enemies.destroySpawnEvent();
     }
 
     return {
