@@ -9,7 +9,8 @@ Enemies = function() {
 		var enemyGroup = PhaserGame.add.group();
 		enemyGroup.enableBody = true;
 		PhaserGame.physics.enable(enemyGroup, Phaser.Physics.ARCADE);
-		spawnEvent = PhaserGame.time.events.repeat(Phaser.Timer.SECOND * timeParam, 10, spawnEnemy, this, enemyGroup);
+		spawnEvent = PhaserGame.time.events.loop(Phaser.Timer.SECOND * timeParam, spawnEnemy, this, enemyGroup);
+
 		return enemyGroup;
 	}
 
@@ -37,6 +38,8 @@ Enemies = function() {
 		}
 
         var enemy = enemyGroup.create(x, y, 'enemy');
+        enemy.animations.add('flop', [0,1]);
+        enemy.animations.play('flop', 5, true);
 	}
 
 	function destroySpawnEvent() {
