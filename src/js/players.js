@@ -15,7 +15,7 @@ Players = function() {
 
             player.body.collideWorldBounds = true;
 
-            player.direction = DirectionEnum.DOWN;
+            player.direction = "front";
             player.x_direction = "left";
 
             player.scale.setTo(.35,.35);
@@ -31,13 +31,13 @@ Players = function() {
             {
                 player.body.velocity.y = -playerSpeed;
                 player.animations.play('player_back_walk', 6, true);
-                player.direction = DirectionEnum.DOWN;
+                player.direction = DirectionEnum.UP;
             }
             else if (Controller.downKey.isDown)
             {
                 player.body.velocity.y = playerSpeed;
                 player.animations.play('player_front_walk', 6, true);
-                player.direction = DirectionEnum.UP;
+                player.direction = DirectionEnum.DOWN;
             } else 
             {
                 player.body.velocity.y = 0;
@@ -45,33 +45,32 @@ Players = function() {
 
             if (Controller.leftKey.isDown)
             {
-                if(player.x_direction == DirectionEnum.RIGHT;)
+                if(player.x_direction == "right")
                 {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = -playerSpeed;
                 player.animations.play('player_side_walk', 6, true);
-                player.x_direction = DirectionEnum.LEFT;
+                player.x_direction = "left";
                 player.direction = DirectionEnum.LEFT;
             }
             else if (Controller.rightKey.isDown)
             {
-                if(this.x_direction == DirectionEnum.LEFT)
+                if(this.x_direction == "left")
                 {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = playerSpeed; 
                 player.animations.play('player_side_walk', 6, true);
-                player.x_direction = DirectionEnum.RIGHT;
+                player.x_direction = "right";
                 player.direction = DirectionEnum.RIGHT;
             } else 
             {
                 player.body.velocity.x = 0;
             }
 
-
             if (Controller.spaceKey.isDown){
-                var snowball = Snowball.init(player, player.direction);
+                var snowball = Snowballs.init(player, player.direction);
             }
         })
     }
