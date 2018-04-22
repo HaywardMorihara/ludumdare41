@@ -3,16 +3,19 @@ Game = function() {
     //movable PhaserGame objects
     var players;
     var enemies;
+    var snowballs;
 
 
     //static PhaserGame objects
     var nestGroup;
     var egg;
     var nest;
+    var iglooGroup;
 
     //stats
     var lives;
     var livesText;
+
 
     function init(numberOfPlayers) {
         PhaserGame.stage.backgroundColor = '#fcfcff';
@@ -24,25 +27,37 @@ Game = function() {
 
         //initialize static PhaserGame objects
         nestGroup = NestGroup.init(lives);
+        iglooGroup = IglooGroup.init();
 
-        players = Players.init(numberOfPlayers);
+        snowballs = Snowballs.init();
+
+        players = Players.init(numberOfPlayers, snowballs);
 
         enemies = Enemies.init();
+
     }
 
     function update() {
-        Players.update(players);
+        Players.update(players, snowballs);
 
         Enemies.update(enemies);
+
+        Snowballs.update(snowballs, enemies);
 
 
         PhaserGame.physics.arcade.collide(players, enemies);
         PhaserGame.physics.arcade.collide(players);
         PhaserGame.physics.arcade.overlap(enemies, nestGroup, loseLife, null, this);
 
+
         if (lives <= 0) {
             lose();
         }
+
+        if (Mating.mated(players, iglooGroup)) {
+            livesText.text = 'lives: ' + ++lives;
+        }
+
     }
 
     function debug() {
@@ -68,14 +83,17 @@ Game = function() {
         enemies.destroy();
         nestGroup.destroy();
         livesText.destroy();
+        iglooGroup.destroy();
 
         Enemies.destroySpawnEvent();
     }
+
 
     return {
         init: init,
         update: update,
         debug: debug
     }
+        
 }();
 

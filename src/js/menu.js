@@ -43,7 +43,7 @@ Menu = function() {
 	    fourPlayers.anchor.setTo(0.5, 0);
 
 	    //Cursor
-	    cursor = PhaserGame.add.sprite(onePlayer.x - onePlayer.width, onePlayer.y, 'penguin');
+	    cursor = PhaserGame.add.sprite(onePlayer.x - onePlayer.width, onePlayer.y, 'penguin-black');
 	    cursor.scale.setTo(.2,.2);
 	    cursor.animations.add('walk');
 	    cursorSelection = CursorSelection.ONE_PLAYER;
