@@ -1,5 +1,4 @@
-var PhaserGame = new Phaser.Game(1200, 600, Phaser.AUTO, 'penguin-defense', 
-    { preload: preload, create: create, update: update, render: render });
+var PhaserGame;
 
 function preload() {
     PhaserGame.load.spritesheet('penguin', 'assets/sprites/penguin-front.png', 200, 200);
@@ -21,3 +20,8 @@ function render() {
         Game.debug();
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+   PhaserGame = new Phaser.Game(1200, 600, Phaser.AUTO, 'penguin-defense', 
+    { preload: preload, create: create, update: update, render: render });
+}, false);
