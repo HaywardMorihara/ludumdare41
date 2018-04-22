@@ -1,6 +1,6 @@
 Penguin = function() {
     var penguinSpeed = 200;
-
+ 
     function init() {
         var penguin = PhaserGame.add.sprite(300, 300, 'penguin');
         var walk = penguin.animations.add('walk')
@@ -15,10 +15,12 @@ Penguin = function() {
         if (Controller.upKey.isDown)
         {
             penguin.body.velocity.y = -penguinSpeed;
+            penguin.direction = DirectionEnum.UP;
         }
         else if (Controller.downKey.isDown)
         {
             penguin.body.velocity.y = penguinSpeed;
+            penguin.direction = DirectionEnum.DOWN;
         } else 
         {
             penguin.body.velocity.y = 0;
@@ -27,14 +29,23 @@ Penguin = function() {
         if (Controller.leftKey.isDown)
         {
             penguin.body.velocity.x = -penguinSpeed;
+            penguin.direction = DirectionEnum.LEFT;
         }
         else if (Controller.rightKey.isDown)
         {
             penguin.body.velocity.x = penguinSpeed; 
+            penguin.direction = DirectionEnum.RIGHT;
         } else 
         {
             penguin.body.velocity.x = 0;
         }
+
+        if (Controller.spaceKey.isDown){
+            var snowball = Snowball.init(penguin, penguin.direction);
+            //snowball.update();
+        }
+
+
 
         penguin.animations.play('walk', 6, true)
         

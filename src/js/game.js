@@ -43,6 +43,7 @@ Game = function() {
         Enemy.update(enemy);
 
         PhaserGame.physics.arcade.collide(penguin, enemy);
+        //PhaserGame.physics.arcade.collide(snowball, enemy);
         PhaserGame.physics.arcade.overlap(enemy, nestGroup, loseLife, null, this);
     }
 
