@@ -85,7 +85,6 @@ Players = function() {
 
             //allow player to throw once every second
             if (Controller.spaceKey.isDown){
-                console.log(player.hasSnowball);
                 if (player.hasSnowball){
                     Snowballs.throwSnowball(player, player.direction, snowballGroup);
                     player.hasSnowball = false;
