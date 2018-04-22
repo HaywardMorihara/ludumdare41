@@ -16,7 +16,6 @@ Game = function() {
     var lives;
     var livesText;
 
-
     function init(numberOfPlayers) {
         PhaserGame.stage.backgroundColor = '#fcfcff';
         PhaserGame.physics.startSystem(Phaser.Physics.ARCADE);
@@ -34,7 +33,6 @@ Game = function() {
         players = Players.init(numberOfPlayers, snowballs);
 
         enemies = Enemies.init();
-
     }
 
     function update() {

@@ -35,7 +35,7 @@ Players = function() {
             createSnowballEvent = PhaserGame.time.events.loop(Phaser.Timer.SECOND * 0.5, createSnowball, this, player);
             console.log(createSnowballEvent);
         }
-
+        Audio.init();
         return playerGroup;
     }
 
@@ -88,6 +88,7 @@ Players = function() {
                 if (player.hasSnowball){
                     Snowballs.throwSnowball(player, player.direction, snowballGroup);
                     player.hasSnowball = false;
+                    Audio.playFx();
                 }
             }
         })
