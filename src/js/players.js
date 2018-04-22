@@ -25,7 +25,7 @@ Players = function() {
         return playerGroup;
     }
 
-    function update(playerGroup) {
+    function update(playerGroup, snowballGroup) {
         playerGroup.forEach(function(player) {
             if (Controller.upKey.isDown)
             {
@@ -70,7 +70,7 @@ Players = function() {
             }
 
             if (Controller.spaceKey.isDown){
-                var snowball = Snowballs.init(player, player.direction);
+                var snowball = Snowballs.throwSnowball(player, player.direction, snowballGroup);
             }
         })
     }

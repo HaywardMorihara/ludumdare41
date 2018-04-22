@@ -3,6 +3,7 @@ Game = function() {
     //movable PhaserGame objects
     var players;
     var enemies;
+    var snowballs;
 
 
     //static PhaserGame objects
@@ -25,13 +26,15 @@ Game = function() {
         //initialize static PhaserGame objects
         nestGroup = NestGroup.init(lives);
 
-        players = Players.init(numberOfPlayers);
+        snowballs = Snowballs.init();
+
+        players = Players.init(numberOfPlayers, snowballs);
 
         enemies = Enemies.init();
     }
 
     function update() {
-        Players.update(players);
+        Players.update(players, snowballs);
 
         Enemies.update(enemies);
 

@@ -1,13 +1,17 @@
 Snowballs = function() {
     var snowballSpeed = 400;
 
-    function init(player, direction) {
-        var snowball = PhaserGame.add.sprite(player.body.x, player.body.y, 'snowball');
-        snowball.scale.setTo(.5,.5);
-        PhaserGame.physics.enable(snowball, Phaser.Physics.ARCADE);
+    function init() {
+        var snowballGroup = PhaserGame.add.group();
+        snowballGroup.enableBody = true;
+        PhaserGame.physics.enable(snowballGroup, Phaser.Physics.ARCADE);
+        return snowballGroup;
+    }
 
-        //snowball.direction = direction;
-        snowball.speed = 400;
+    function throwSnowball(player, direction, snowballGroup) { 
+        var snowball = snowballGroup.create(player.body.x, player.body.y, 'snowball');
+        snowball.scale.setTo(.5,.5);
+
         if (direction == DirectionEnum.UP) {
             snowball.body.velocity.y = -snowballSpeed;
         } else if (direction == DirectionEnum.DOWN) {
@@ -17,7 +21,6 @@ Snowballs = function() {
         } else if (direction == DirectionEnum.RIGHT) {
             snowball.body.velocity.x = snowballSpeed;
         }
-        return snowball;
     }
 
     function update() {
@@ -32,6 +35,7 @@ Snowballs = function() {
 
     return {
         init: init,
+        throwSnowball: throwSnowball,
         update: update,
         debug: debug
     }
