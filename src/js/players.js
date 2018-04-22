@@ -95,7 +95,6 @@ Players = function() {
     }
 
     function createSnowball(player) {
-        console.log("create");
         player.hasSnowball = true;
     }
 

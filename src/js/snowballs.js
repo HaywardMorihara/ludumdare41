@@ -32,7 +32,6 @@ Snowballs = function() {
     }
 
     function collisionHandler(snowball, enemy) {
-        console.log("kill");
         snowball.kill();
         enemy.kill();
     }
