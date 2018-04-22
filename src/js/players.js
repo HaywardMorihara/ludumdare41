@@ -45,13 +45,13 @@ Players = function() {
             if (Controller.upKey.isDown || Controller.gamePads.axis(GamePads[player.playerNumber].UD) < -0.3)
             {
                 player.body.velocity.y = -playerSpeed;
-                player.animations.play('player_back_walk', 6, true);
+                player.animations.play('player_back_walk', 20, true);
                 player.direction = DirectionEnum.UP;
             }
             else if (Controller.downKey.isDown || Controller.gamePads.axis(GamePads[player.playerNumber].UD) > 0.3)
             {
                 player.body.velocity.y = playerSpeed;
-                player.animations.play('player_front_walk', 6, true);
+                player.animations.play('player_front_walk', 20, true);
                 player.direction = DirectionEnum.DOWN;
             } else 
             {
@@ -65,7 +65,7 @@ Players = function() {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = -playerSpeed;
-                player.animations.play('player_side_walk', 6, true);
+                player.animations.play('player_side_walk', 20, true);
                 player.x_direction = DirectionEnum.LEFT;
                 player.direction = player.x_direction;
             }
@@ -76,12 +76,16 @@ Players = function() {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = playerSpeed; 
-                player.animations.play('player_side_walk', 6, true);
+                player.animations.play('player_side_walk', 20, true);
                 player.x_direction = DirectionEnum.RIGHT;
                 player.direction = player.x_direction;
             } else 
             {
                 player.body.velocity.x = 0;
+            }
+
+            if (player.body.velocity.x == 0 && player.body.velocity.y == 0) {
+                player.animations.stop(null, true);
             }
 
             //allow player to throw once every second
