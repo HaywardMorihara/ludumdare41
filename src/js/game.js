@@ -50,7 +50,7 @@ Game = function() {
 
 
         if (lives <= 0) {
-            //lose();
+            lose();
         }
 
         if (Mating.mated(players, iglooGroup)) {
