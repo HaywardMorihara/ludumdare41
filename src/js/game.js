@@ -9,10 +9,12 @@ Game = function() {
     var nestGroup;
     var egg;
     var nest;
+    var iglooGroup;
 
     //stats
     var lives;
     var livesText;
+
 
     function init(numberOfPlayers) {
         PhaserGame.stage.backgroundColor = '#fcfcff';
@@ -24,10 +26,12 @@ Game = function() {
 
         //initialize static PhaserGame objects
         nestGroup = NestGroup.init(lives);
+        iglooGroup = IglooGroup.init();
 
         players = Players.init(numberOfPlayers);
 
         enemies = Enemies.init();
+
     }
 
     function update() {
@@ -40,9 +44,15 @@ Game = function() {
         PhaserGame.physics.arcade.collide(players);
         PhaserGame.physics.arcade.overlap(enemies, nestGroup, loseLife, null, this);
 
+
         if (lives <= 0) {
             lose();
         }
+
+        if (Mating.mated(players, iglooGroup)) {
+            livesText.text = 'lives: ' + ++lives;
+        }
+
     }
 
     function debug() {
@@ -72,10 +82,12 @@ Game = function() {
         Enemies.destroySpawnEvent();
     }
 
+
     return {
         init: init,
         update: update,
         debug: debug
     }
+        
 }();
 
