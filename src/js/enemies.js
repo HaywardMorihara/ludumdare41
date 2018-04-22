@@ -1,4 +1,7 @@
 Enemies = function() {
+
+	var spawnEvent;
+
 	function init() {
 		//could be changed based on difficulty
 		var timeParam = 1;
@@ -6,7 +9,7 @@ Enemies = function() {
 		var enemyGroup = PhaserGame.add.group();
 		enemyGroup.enableBody = true;
 		PhaserGame.physics.enable(enemyGroup, Phaser.Physics.ARCADE);
-		PhaserGame.time.events.repeat(Phaser.Timer.SECOND * timeParam, 10, spawnEnemy, this, enemyGroup);
+		spawnEvent = PhaserGame.time.events.repeat(Phaser.Timer.SECOND * timeParam, 10, spawnEnemy, this, enemyGroup);
 		return enemyGroup;
 	}
 
@@ -36,6 +39,10 @@ Enemies = function() {
         var enemy = enemyGroup.create(x, y, 'enemy');
 	}
 
+	function destroySpawnEvent() {
+		PhaserGame.time.events.remove(spawnEvent);
+	}
+
 	function debug(enemies) {
 	    PhaserGame.debug.body(enemies);
 	    PhaserGame.debug.bodyInfo(enemies, 32, 150);
@@ -44,6 +51,7 @@ Enemies = function() {
 	return {
 		init: init,
 		update: update,
-		debug: debug
+		debug: debug,
+		destroySpawnEvent: destroySpawnEvent
 	}
 }();
