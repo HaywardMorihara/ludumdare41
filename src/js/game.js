@@ -83,6 +83,7 @@ Game = function() {
         nestGroup.destroy();
         livesText.destroy();
         iglooGroup.destroy();
+        Snowballs.snowballGroup.destroy();
 
         Enemies.destroySpawnEvent();
     }
