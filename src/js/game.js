@@ -13,12 +13,6 @@ Game = function() {
     var lives;
     var livesText;
 
-    //By not having them declared here, they're global.....WILL REFACTOR THIS
-    // var upKey;
-    // var downKey;
-    // var leftKey;
-    // var rightKey;
-
     function init() {
         PhaserGame.stage.backgroundColor = '#fcfcff';
         PhaserGame.physics.startSystem(Phaser.Physics.ARCADE);
@@ -33,8 +27,6 @@ Game = function() {
         //initialize players
         penguin = Penguin.init();
         enemy = Enemy.init();
-
-        Controller.init();
     }
 
     function update() {
