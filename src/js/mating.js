@@ -18,6 +18,9 @@ Mating = function() {
             mateable = false;
             iglooGroup.alpha = 0.2;
             PhaserGame.time.events.add(Phaser.Timer.SECOND * 4, spawnMatingSite, this);
+            var hearts = PhaserGame.add.sprite(400, 0, 'hearts');
+            hearts.animations.add('shootHearts', [0,1,2,3,4,5]);
+            hearts.animations.play('shootHearts', 5, false, true);
             return true;
 
         }
