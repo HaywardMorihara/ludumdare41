@@ -42,6 +42,8 @@ Game = function() {
 
         Enemies.update(enemies);
 
+        Snowballs.update(snowballs, enemies);
+
 
         PhaserGame.physics.arcade.collide(players, enemies);
         PhaserGame.physics.arcade.collide(players);

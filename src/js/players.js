@@ -1,5 +1,6 @@
 Players = function() {
     var playerSpeed = 200;
+    var createSnowballEvent;
 
     function init(numberOfPlayers) {
         var playerGroup = PhaserGame.add.group();
@@ -29,6 +30,10 @@ Players = function() {
 
             player.scale.setTo(.35,.35);
             player.anchor.setTo(.5,.5);
+
+            player.hasSnowball = true;
+            createSnowballEvent = PhaserGame.time.events.loop(Phaser.Timer.SECOND * 0.5, createSnowball, this, player);
+            console.log(createSnowballEvent);
         }
 
         return playerGroup;
@@ -78,10 +83,20 @@ Players = function() {
                 player.body.velocity.x = 0;
             }
 
+            //allow player to throw once every second
             if (Controller.spaceKey.isDown){
-                var snowball = Snowballs.throwSnowball(player, player.direction, snowballGroup);
+                console.log(player.hasSnowball);
+                if (player.hasSnowball){
+                    Snowballs.throwSnowball(player, player.direction, snowballGroup);
+                    player.hasSnowball = false;
+                }
             }
         })
+    }
+
+    function createSnowball(player) {
+        console.log("create");
+        player.hasSnowball = true;
     }
 
     function debug(player) {
@@ -93,6 +108,7 @@ Players = function() {
     return {
         init: init,
         update: update,
+        createSnowball: createSnowball,
         debug: debug
     }
 }();

@@ -21,10 +21,20 @@ Snowballs = function() {
         } else if (direction == DirectionEnum.RIGHT) {
             snowball.body.velocity.x = snowballSpeed;
         }
+        else {
+            snowball.body.velocity.y = -snowballSpeed;
+        }
     }
 
-    function update() {
-      
+
+    function update(snowballGroup, enemyGroup) {
+        PhaserGame.physics.arcade.overlap(snowballGroup, enemyGroup, collisionHandler, null, this);
+    }
+
+    function collisionHandler(snowball, enemy) {
+        console.log("kill");
+        snowball.kill();
+        enemy.kill();
     }
 
     function debug(snowball) {
