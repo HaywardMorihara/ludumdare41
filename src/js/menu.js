@@ -18,23 +18,25 @@ Menu = function() {
 	};
 
 	function init() {
-		var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+		PhaserGame.stage.backgroundColor = '#000000';
+
+		var textStyle = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
 
 		//Title
-	    title = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/6, "Penguin Defense", style);
+	    title = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/6, "Penguin Defense", textStyle);
 		title.anchor.setTo(0.5, 0);
 
 	    //Player Selection
-	    onePlayer = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/2, "One Player", style);
+	    onePlayer = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/2, "One Player", textStyle);
 	    onePlayer.anchor.setTo(0.5, 0);
 
-	    twoPlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 9, "Two Players", style);
+	    twoPlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 9, "Two Players", textStyle);
 	    twoPlayers.anchor.setTo(0.5, 0);
 
-	    threePlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 10, "Three Players", style);
+	    threePlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 10, "Three Players", textStyle);
 	    threePlayers.anchor.setTo(0.5, 0);
 
-	    fourPlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 11, "Four Players", style);
+	    fourPlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 11, "Four Players", textStyle);
 	    fourPlayers.anchor.setTo(0.5, 0);
 
 	    //Cursor
@@ -49,7 +51,6 @@ Menu = function() {
 				cursorSelection = cursorSelection - 1;
 				updateCursorLocation();
 			}
-			console.log("Up");
 		});
 		Controller.downKey.onUp.add(function() {
 			if (cursorSelection < CursorSelection.FOUR_PLAYERS) {
