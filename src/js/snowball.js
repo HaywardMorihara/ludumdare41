@@ -2,7 +2,7 @@ Snowball = function() {
 
     function init(penguin, direction) {
         var snowball = PhaserGame.add.sprite(penguin.body.x, penguin.body.y, 'snowball');
-        snowball.scale.setTo(.3,.3);
+        snowball.scale.setTo(.5,.5);
         PhaserGame.physics.enable(snowball, Phaser.Physics.ARCADE);
 
         //snowball.direction = direction;

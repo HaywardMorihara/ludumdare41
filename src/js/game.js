@@ -3,6 +3,7 @@ Game = function() {
     //movable PhaserGame objects
     var penguin;
     var enemy;
+    var snowball;
 
     //static PhaserGame objects
     var nestGroup;
@@ -35,7 +36,7 @@ Game = function() {
         Enemy.update(enemy);
 
         PhaserGame.physics.arcade.collide(penguin, enemy);
-        //PhaserGame.physics.arcade.collide(snowball, enemy);
+        PhaserGame.physics.arcade.collide(snowball, enemy);
         PhaserGame.physics.arcade.overlap(enemy, nestGroup, loseLife, null, this);
     }
 
@@ -43,7 +44,6 @@ Game = function() {
 
     function debug() {
         Penguin.debug(PhaserGame, penguin);
-
         Enemy.debug(PhaserGame, enemy);
     }
 
