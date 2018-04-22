@@ -38,7 +38,7 @@ Enemies = function() {
 		}
 
         var enemy = enemyGroup.create(x, y, 'enemy');
-        enemy.animations.add('flop', [0,1]);
+        enemy.animations.add('flop', [1,2]);
         enemy.animations.play('flop', 5, true);
 	}
 
