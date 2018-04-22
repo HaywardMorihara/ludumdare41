@@ -20,9 +20,9 @@ Players = function() {
             
             player.playerNumber = i + 1;
 
-            var player_back_walk = player.animations.add('player_back_walk', [0,1,2,3]);
-            var player_front_walk = player.animations.add('player_front_walk', [4,5,6,7]);
-            var player_side_walk = player.animations.add('player_side_walk', [8,9,10,11]);
+            var player_back_walk = player.animations.add('player_back_walk', [2,3,4,5]);
+            var player_front_walk = player.animations.add('player_front_walk', [9,10,11,12]);
+            var player_side_walk = player.animations.add('player_side_walk', [16,17,18,19]);
 
             player.body.collideWorldBounds = true;
 

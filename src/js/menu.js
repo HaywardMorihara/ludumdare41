@@ -45,7 +45,7 @@ Menu = function() {
 	    //Cursor
 	    cursor = PhaserGame.add.sprite(onePlayer.x - onePlayer.width, onePlayer.y, 'penguin-black');
 	    cursor.scale.setTo(.2,.2);
-	    cursor.animations.add('walk');
+	    cursor.animations.add('walk', [9,10,11,12]);
 	    cursorSelection = CursorSelection.ONE_PLAYER;
 
 	    //Controls
@@ -91,7 +91,7 @@ Menu = function() {
 	}
 
 	function update() {
-		cursor.animations.play('walk', 6, true);
+		cursor.animations.play('walk', 10, true);
 
 		if (debugController) {
 			debug();
