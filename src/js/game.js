@@ -4,6 +4,7 @@ Game = function() {
     var players;
     var enemies;
 
+
     //static PhaserGame objects
     var nestGroup;
     var egg;
@@ -34,6 +35,7 @@ Game = function() {
 
         Enemies.update(enemies);
 
+
         PhaserGame.physics.arcade.collide(players, enemies);
         PhaserGame.physics.arcade.collide(players);
         PhaserGame.physics.arcade.overlap(enemies, nestGroup, loseLife, null, this);
@@ -44,6 +46,7 @@ Game = function() {
     }
 
     function debug() {
+
         //players.debug(PhaserGame, player);
 
         Enemies.debug(PhaserGame, enemies);

@@ -31,13 +31,13 @@ Players = function() {
             {
                 player.body.velocity.y = -playerSpeed;
                 player.animations.play('player_back_walk', 6, true);
-                player.direction = "down";
+                player.direction = DirectionEnum.UP;
             }
             else if (Controller.downKey.isDown)
             {
                 player.body.velocity.y = playerSpeed;
                 player.animations.play('player_front_walk', 6, true);
-                player.direction = "up";
+                player.direction = DirectionEnum.DOWN;
             } else 
             {
                 player.body.velocity.y = 0;
@@ -52,7 +52,7 @@ Players = function() {
                 player.body.velocity.x = -playerSpeed;
                 player.animations.play('player_side_walk', 6, true);
                 player.x_direction = "left";
-                player.direction = this.x_direction;
+                player.direction = DirectionEnum.LEFT;
             }
             else if (Controller.rightKey.isDown)
             {
@@ -63,10 +63,14 @@ Players = function() {
                 player.body.velocity.x = playerSpeed; 
                 player.animations.play('player_side_walk', 6, true);
                 player.x_direction = "right";
-                player.direction = this.x_direction;
+                player.direction = DirectionEnum.RIGHT;
             } else 
             {
                 player.body.velocity.x = 0;
+            }
+
+            if (Controller.spaceKey.isDown){
+                var snowball = Snowballs.init(player, player.direction);
             }
         })
     }
