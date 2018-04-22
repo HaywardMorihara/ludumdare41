@@ -1,5 +1,5 @@
 var GamePads = {
-	P1: {
+	1: {
 		UD: 4,
 		LR: 0,
 		CUD: 11,
@@ -19,7 +19,7 @@ var GamePads = {
 		X: 0,
 		Y: 3
 	},
-	P2: {
+	2: {
 		UD: 6,
 		LR: 1,
 		CUD: 8,
@@ -39,7 +39,7 @@ var GamePads = {
 		X: 16,
 		Y: 19
 	},
-	P3: {
+	3: {
 		UD: 5,
 		LR: 2,
 		CUD: 10,
@@ -59,7 +59,7 @@ var GamePads = {
 		X: 32,
 		Y: 35
 	},
-	P4: {
+	4: {
 		UD: 7,
 		LR: 3,
 		CUD: 9,

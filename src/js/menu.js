@@ -17,7 +17,7 @@ Menu = function() {
 	  FOUR_PLAYERS: 3
 	};
 
-	var debugController = false;
+	var debugController = true;
 	var debugControllerText = [];
 
 	function init() {
