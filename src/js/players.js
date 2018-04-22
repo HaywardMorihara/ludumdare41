@@ -107,8 +107,10 @@ Players = function() {
 
     function addButtons(player) {
         //Snowball Throwing
-        var buttonB = Controller.gamePads.getButton(GamePads[player.playerNumber].B);
-        buttonB.onUp.add(function(){ return buildSnowball(player); }, this);
+        if (Controller.gamePads.connected) {
+            var buttonB = Controller.gamePads.getButton(GamePads[player.playerNumber].B);
+            buttonB.onUp.add(function(){ return buildSnowball(player); }, this);
+        }
         Controller.bKey.onUp.add(function(){ return buildSnowball(player); });
     }
 
