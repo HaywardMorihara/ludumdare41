@@ -17,9 +17,9 @@ function preload() {
     PhaserGame.load.spritesheet('penguin-orange', 'assets/sprites/penguin-orange.png', 200, 200);
     PhaserGame.load.spritesheet('penguin-blue', 'assets/sprites/penguin-blue.png', 200, 200);
     PhaserGame.load.spritesheet('penguin-pink', 'assets/sprites/penguin-pink.png', 200, 200);
+    PhaserGame.load.spritesheet('enemy', 'assets/sprites/seal.png', 180, 123);
     PhaserGame.load.image('nest', 'assets/static/nest.png');
     PhaserGame.load.image('egg', 'assets/static/egg.png');
-    PhaserGame.load.image('enemy', 'assets/sprites/phaser-dude.png');
     PhaserGame.load.spritesheet('snowball', 'assets/sprites/snowball.png');
     PhaserGame.load.image('igloo', 'assets/static/igloo.png');
 }
