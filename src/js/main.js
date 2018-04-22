@@ -22,6 +22,7 @@ function preload() {
     PhaserGame.load.image('egg', 'assets/static/egg.png');
     PhaserGame.load.spritesheet('snowball', 'assets/sprites/snowball.png');
     PhaserGame.load.image('igloo', 'assets/static/igloo.png');
+    PhaserGame.load.spritesheet('hearts', 'assets/sprites/hearts.png', 150, 150);
 }
 
 function create() {
