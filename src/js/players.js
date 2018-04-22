@@ -25,8 +25,8 @@ Players = function() {
 
             player.body.collideWorldBounds = true;
 
-            player.direction = "front";
-            player.x_direction = "left";
+            player.direction = DirectionEnum.DOWN;
+            player.x_direction = DirectionEnum.LEFT;
 
             player.scale.setTo(.35,.35);
             player.anchor.setTo(.5,.5);
@@ -59,25 +59,25 @@ Players = function() {
 
             if (Controller.leftKey.isDown)
             {
-                if(player.x_direction == "right")
+                if(player.x_direction == DirectionEnum.RIGHT)
                 {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = -playerSpeed;
                 player.animations.play('player_side_walk', 6, true);
-                player.x_direction = "left";
-                player.direction = DirectionEnum.LEFT;
+                player.x_direction = DirectionEnum.LEFT;
+                player.direction = player.x_direction;
             }
             else if (Controller.rightKey.isDown)
             {
-                if(this.x_direction == "left")
+                if(player.x_direction == DirectionEnum.LEFT)
                 {
                     player.scale.x *= -1;
                 }
                 player.body.velocity.x = playerSpeed; 
                 player.animations.play('player_side_walk', 6, true);
-                player.x_direction = "right";
-                player.direction = DirectionEnum.RIGHT;
+                player.x_direction = DirectionEnum.RIGHT;
+                player.direction = player.x_direction;
             } else 
             {
                 player.body.velocity.x = 0;
