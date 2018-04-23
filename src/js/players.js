@@ -181,14 +181,15 @@ Players = function() {
     }
 
     function destroyAll(playerGroup) {
-        if (Controller.gamePads.connected) {
-            playerGroup.forEach(function(player) {
-                console.log("destorying all");
+        
+        playerGroup.forEach(function(player) {
+            if (Controller.gamePads.connected) {
                 var buttonB = Controller.gamePads.getButton(GamePads[player.playerNumber].B);
                 buttonB.onDown.removeAll();
                 buttonB.onUp.removeAll();
-            });
-        }
+            }
+            player.ammoText.destroy();
+        });
         playerGroup.destroy();
     }
 
