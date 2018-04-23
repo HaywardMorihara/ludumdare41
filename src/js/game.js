@@ -14,14 +14,20 @@ Game = function() {
     //stats
     var lives;
     var livesText;
+    var timer;
+    var timerText;
+    var timeEvent;
 
     function init(numberOfPlayers) {
         PhaserGame.stage.backgroundColor = '#fcfcff';
         PhaserGame.physics.startSystem(Phaser.Physics.ARCADE);
+        timeEvent = PhaserGame.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
 
         //initialize stats
         lives = 3;
+        timer = 0;
         livesText = PhaserGame.add.text(16, 16, 'lives: ' + lives, { fontSize: '32px', fill: '#000' });
+        timerText = PhaserGame.add.text(16, 42, 'time: ' + timer, { fontSize: '32px', fill: '#000' });
 
         //initialize static PhaserGame objects
         nestGroup = NestGroup.init(lives);
@@ -59,7 +65,6 @@ Game = function() {
         if (Mating.mated(players, iglooGroup)) {
             livesText.text = 'lives: ' + ++lives;
         }
-
     }
 
     function debug() {
@@ -75,8 +80,8 @@ Game = function() {
     }
 
     function lose() {
-        Main.state = State.MENU;
-        Menu.init();
+        Main.state = State.GAMEOVER;
+        GameOver.init(timer);
         destroyAll();
     }
 
@@ -85,10 +90,20 @@ Game = function() {
         enemies.destroy();
         nestGroup.destroy();
         livesText.destroy();
+        timerText.destroy();
         iglooGroup.destroy();
         Snowballs.snowballGroup.destroy();
 
         Enemies.destroySpawnEvent();
+
+        PhaserGame.time.events.remove(timeEvent);
+    }
+
+    function updateCounter() {
+
+        timer++;
+        timerText.setText('time: ' + timer);
+
         Audio.stopFx("music");
     }
 
@@ -96,7 +111,7 @@ Game = function() {
     return {
         init: init,
         update: update,
-        debug: debug
+        debug: debug,
     }
         
 }();
