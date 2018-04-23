@@ -1,4 +1,9 @@
 GameOver = function () {
+
+	var gameOverText;
+	var timeText;
+	var enterText;
+
 	
 	function init(timer) {
 		PhaserGame.stage.backgroundColor = '#000000';
@@ -11,8 +16,8 @@ GameOver = function () {
 		timeText = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/4, "Time: " + timer, textStyle);
 		timeText.anchor.setTo(0.5, 0);
 
-		timeText = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/2, "Press [Enter] to Go To Menu", textStyle);
-		timeText.anchor.setTo(0.5, 0);
+		enterText = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/2, "Press [Enter] to Go To Menu", textStyle);
+		enterText.anchor.setTo(0.5, 0);
 
 
 		Controller.enterKey.onUp.add(function() {
@@ -23,8 +28,11 @@ GameOver = function () {
 
 
 		function destroyAll() {
-			title.destroy();
+			gameOverText.destroy();
+			timeText.destroy();
+			enterText.destroy();
 			Controller.enterKey.onUp.removeAll();
+
 		}
 	}
 
