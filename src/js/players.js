@@ -28,6 +28,10 @@ Players = function() {
             var player_front_snowball_making = player.animations.add('player_front_snowball_making', [7,8]);
             var player_side_snowball_making = player.animations.add('player_side_snowball_making', [14,15]);
 
+            var player_back_snowball_throw = player.animations.add('player_back_snowball_throw', [2,6,2]);
+            var player_front_snowball_throw = player.animations.add('player_front_snowball_throw', [13]);
+            var player_side_snowball_throw = player.animations.add('player_side_snowball_throw', [20,16]);
+
             player.body.collideWorldBounds = true;
 
             player.direction = DirectionEnum.DOWN;
@@ -96,7 +100,9 @@ Players = function() {
                 }
 
                 if (player.body.velocity.x == 0 && player.body.velocity.y == 0) {
-                    player.animations.stop(null, true);
+                    if (Controller.spaceKey.isDown || Controller.gamePads.isDown(GamePads[player.playerNumber].A)) {
+                        player.animations.stop(null, true);
+                    }
                 }
             }
 
@@ -127,22 +133,33 @@ Players = function() {
             buttonB.onUp.add(function(){ return buildSnowball(player); }, this);
 
             var buttonA = Controller.gamePads.getButton(GamePads[player.playerNumber].A);
-            buttonA.onUp.add(function(){
-                if (player.snowballAmmo.length != 0){
-                    Snowballs.throwSnowball(player, player.direction);
-                    Audio.playFx();
-                    updateAmmoText(player);
-                }
-            });
+            buttonA.onUp.add(function(){ return playerThrowSnowball(player)});
         }
         Controller.bKey.onDown.add(function(){ return animateSnowballMaking(player); });
         Controller.bKey.onUp.add(function(){ return buildSnowball(player); });
-        Controller.spaceKey.onUp.add(function(){ 
-            if (player.snowballAmmo.length != 0){
-                    Snowballs.throwSnowball(player, player.direction);
-                    Audio.playFx();
-                    updateAmmoText(player);
-                } });
+        Controller.spaceKey.onUp.add(function(){ return playerThrowSnowball(player)});
+    }
+
+    function playerThrowSnowball(player) {
+        if (player.snowballAmmo.length != 0){
+            Snowballs.throwSnowball(player, player.direction);
+            Audio.playFx();
+            updateAmmoText(player);
+            switch(player.direction) {
+                case DirectionEnum.UP:
+                    player.animations.play('player_back_snowball_throw', 10, false);
+                    break;
+                case DirectionEnum.DOWN:
+                    player.animations.play('player_front_snowball_throw', 10, false);
+                    break;
+                case DirectionEnum.LEFT:
+                    player.animations.play('player_side_snowball_throw', 10, false);
+                    break;
+                case DirectionEnum.RIGHT:
+                    player.animations.play('player_side_snowball_throw', 10, false);
+                    break
+            }
+        }
     }
 
     function animateSnowballMaking(player) {
