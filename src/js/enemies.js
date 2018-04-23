@@ -1,10 +1,16 @@
 Enemies = function() {
 
+	var difficulty;
+
 	var spawnEvent;
 
-	function init() {
-		//could be changed based on difficulty
-		var timeParam = 1;
+	var speed;
+
+	function init(numberOfPlayers) {
+		difficulty = numberOfPlayers;
+		speed = 15 * difficulty;
+
+		var timeParam = 1 / difficulty;
 
 		var enemyGroup = PhaserGame.add.group();
 		enemyGroup.enableBody = true;
@@ -16,12 +22,11 @@ Enemies = function() {
 
 	function update(enemyGroup) {
 		enemyGroup.forEach(function(enemy) {
-			PhaserGame.physics.arcade.moveToXY(enemy, 300, 300, 50);
+			PhaserGame.physics.arcade.moveToXY(enemy, NestGroup.nest.x, NestGroup.nest.y, speed);
 		})
 	}
 
 	function spawnEnemy(enemyGroup) {
-		
 		var width = PhaserGame.width;
 		var height = PhaserGame.height;
 		var x = PhaserGame.rnd.integerInRange(0, width);
