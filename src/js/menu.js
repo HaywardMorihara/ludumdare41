@@ -2,6 +2,7 @@ Menu = function() {
 
 	var cursor;
 	var cursorSelection;
+	var gcControllerHeldTime = 0;
 
 	var title;
 
@@ -65,7 +66,7 @@ Menu = function() {
 			destroyAll();
 			Main.state = State.GAME;
 			Game.init(cursorSelection + 1);
-		})
+		});
 
 		if (debugController) {
 			var debugControllerTextStyle = { font: "bold 8px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
@@ -91,7 +92,35 @@ Menu = function() {
 	}
 
 	function update() {
+		if (Controller.gamePads.connected) {
+            var buttonA = Controller.gamePads.getButton(GamePads[1].A);
+            buttonA.onDown.add(function() {
+            	console.log("fdfd");
+				destroyAll();
+				Main.state = State.GAME;
+				Game.init(cursorSelection + 1);
+			});
+        }
+
 		cursor.animations.play('walk', 10, true);
+
+		if (Controller.gamePads.axis(GamePads[1].UD) > 0.7) {
+			gcControllerHeldTime = gcControllerHeldTime + 1;
+			if (cursorSelection < CursorSelection.FOUR_PLAYERS && gcControllerHeldTime > 5) {
+				cursorSelection = cursorSelection + 1;
+				updateCursorLocation();
+				gcControllerHeldTime = 0;
+			}
+		}
+
+		if (Controller.gamePads.axis(GamePads[1].UD) < -0.7) {
+			gcControllerHeldTime = gcControllerHeldTime + 1;
+			if (cursorSelection > CursorSelection.ONE_PLAYER && gcControllerHeldTime > 5) {
+				cursorSelection = cursorSelection - 1;
+				updateCursorLocation();
+				gcControllerHeldTime = 0;
+			}
+		}
 
 		if (debugController) {
 			debug();
@@ -109,6 +138,10 @@ Menu = function() {
 		Controller.upKey.onUp.removeAll();
 		Controller.downKey.onUp.removeAll();
 		Controller.enterKey.onUp.removeAll();
+		if (Controller.gamePads.connected) {
+            var buttonA = Controller.gamePads.getButton(GamePads[1].A);
+            buttonA.onDown.removeAll();
+        }
 	}
 
 	function debug() {

@@ -25,7 +25,9 @@ function preload() {
     PhaserGame.load.spritesheet('hearts', 'assets/sprites/hearts.png', 150, 150);
 
     //Audio
-    PhaserGame.load.audio('step-sound', 'assets/audio/steps2.mp3');
+    PhaserGame.load.audio('music', 'assets/audio/followme.wav');
+    PhaserGame.load.audio('snowball', 'assets/audio/snowball.mp3');
+    PhaserGame.load.audio('penguin-walk', 'assets/audio/cutewalk.wav');
 }
 
 function create() {
