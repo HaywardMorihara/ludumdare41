@@ -5,6 +5,7 @@ Menu = function() {
 	var gcControllerHeldTime = 0;
 
 	var title;
+	var titleBackground;
 
 	var onePlayer; 
 	var twoPlayers;
@@ -23,31 +24,43 @@ Menu = function() {
 
 	function init() {
 		PhaserGame.stage.backgroundColor = '#000000';
+		titleBackground = PhaserGame.add.sprite(0, 0, 'titleBackground');
 
-		var textStyle = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+		var textStyle = { font: "bold 32px Arial", fill: "#000", boundsAlignH: "center", boundsAlignV: "middle" };
 
 		//Title
-	    title = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/6, "Penguin Defense", textStyle);
+	    title = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/6, "Peng'n Bang", textStyle);
 		title.anchor.setTo(0.5, 0);
+		title.stroke = '#fff';
+    	title.strokeThickness = 6;
 
 	    //Player Selection
 	    onePlayer = PhaserGame.add.text(Main.screenWidth/2, Main.screenHeight/2, "One Player", textStyle);
 	    onePlayer.anchor.setTo(0.5, 0);
+	    onePlayer.stroke = '#fff';
+    	onePlayer.strokeThickness = 6;
 
 	    twoPlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 9, "Two Players", textStyle);
 	    twoPlayers.anchor.setTo(0.5, 0);
+	    twoPlayers.stroke = '#fff';
+    	twoPlayers.strokeThickness = 6;
 
 	    threePlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 10, "Three Players", textStyle);
 	    threePlayers.anchor.setTo(0.5, 0);
+	    threePlayers.stroke = '#fff';
+    	threePlayers.strokeThickness = 6;
 
 	    fourPlayers = PhaserGame.add.text(Main.screenWidth/2, (Main.screenHeight/16) * 11, "Four Players", textStyle);
 	    fourPlayers.anchor.setTo(0.5, 0);
+	    fourPlayers.stroke = '#fff';
+    	fourPlayers.strokeThickness = 6;
 
 	    //Cursor
 	    cursor = PhaserGame.add.sprite(onePlayer.x - onePlayer.width, onePlayer.y, 'penguin-black');
 	    cursor.scale.setTo(.2,.2);
 	    cursor.animations.add('walk', [9,10,11,12]);
 	    cursorSelection = CursorSelection.ONE_PLAYER;
+
 
 	    //Controls
 	    Controller.upKey.onUp.add(function() {
@@ -134,6 +147,7 @@ Menu = function() {
 		twoPlayers.destroy();
 		threePlayers.destroy();
 		fourPlayers.destroy();
+		titleBackground.destroy();
 
 		Controller.upKey.onUp.removeAll();
 		Controller.downKey.onUp.removeAll();
