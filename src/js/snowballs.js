@@ -14,9 +14,15 @@ Snowballs = function() {
     function createSnowball(player) {
         player.snowball = this.snowballGroup.create(player.x, player.y, 'snowball');
         player.snowball.scale.setTo(.5,.5);
+
+        player.snowballAmmo.push(player.snowball);
+
+
     }
 
     function throwSnowball(player, direction) { 
+        player.snowball = player.snowballAmmo.pop();
+        
         if (direction == DirectionEnum.UP) {
             player.snowball.body.velocity.y = -snowballSpeed;
         } else if (direction == DirectionEnum.DOWN) {

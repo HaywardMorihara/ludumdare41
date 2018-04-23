@@ -1,5 +1,6 @@
 Players = function() {
     var playerSpeed = 200;
+    
 
     function init(numberOfPlayers) {
         var playerGroup = PhaserGame.add.group();
@@ -32,7 +33,9 @@ Players = function() {
             player.anchor.setTo(.5,.5);
 
             player.snowBallProgress = 0;
-            player.hasSnowball = false;
+            player.snowballAmmo = [];
+
+            player.ammoText = PhaserGame.add.text(player.x, player.y-75, player.snowballAmmo.length, {font: "32px Arial", fill: "#000000", backgroundColor: "#FFFFFF"});
 
             addButtons(player);
         }
@@ -88,19 +91,15 @@ Players = function() {
                 player.animations.stop(null, true);
             }
 
-            if (Controller.spaceKey.isDown || Controller.gamePads.isDown(GamePads[player.playerNumber].A)){
-                if (player.hasSnowball){
-                    Snowballs.throwSnowball(player, player.direction);
-                    player.hasSnowball = false;
-                    Audio.playFx();
-                }
+            //Update Snowballs being held
+            for (var i = 0; i < player.snowballAmmo.length; i++) {
+                player.snowballAmmo[i].x = player.x;
+                player.snowballAmmo[i].y = player.y;
             }
 
-            //Update Snowball being held
-            if (player.snowball != null) {
-                player.snowball.x = player.x;
-                player.snowball.y = player.y;
-            }
+            //Update Snowball ammo text location
+            player.ammoText.x = player.x;
+            player.ammoText.y = player.y-75;
 
         })
     }
@@ -110,19 +109,38 @@ Players = function() {
         if (Controller.gamePads.connected) {
             var buttonB = Controller.gamePads.getButton(GamePads[player.playerNumber].B);
             buttonB.onUp.add(function(){ return buildSnowball(player); }, this);
+
+            var buttonA = Controller.gamePads.getButton(GamePads[player.playerNumber].A);
+            buttonA.onUp.add(function(){
+                if (player.snowballAmmo.length != 0){
+                    Snowballs.throwSnowball(player, player.direction);
+                    Audio.playFx();
+                    updateAmmoText(player);
+                }
+            });
         }
         Controller.bKey.onUp.add(function(){ return buildSnowball(player); });
+        Controller.spaceKey.onUp.add(function(){ 
+            if (player.snowballAmmo.length != 0){
+                    Snowballs.throwSnowball(player, player.direction);
+                    Audio.playFx();
+                    updateAmmoText(player);
+                } });
     }
 
     function buildSnowball(player) {
-        if(!player.hasSnowball) {
+        if(player.snowballAmmo.length < 10) {
             player.snowBallProgress = player.snowBallProgress + 10;
             if (player.snowBallProgress >= 50) {
                 player.snowBallProgress = 0;
-                player.hasSnowball = true;
                 Snowballs.createSnowball(player);
+                updateAmmoText(player);
             }
         }
+    }
+
+    function updateAmmoText(player) {
+        player.ammoText.setText(player.snowballAmmo.length);
     }
 
     function debug(player) {
