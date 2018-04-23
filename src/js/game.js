@@ -4,11 +4,7 @@ Game = function() {
     var players;
     var enemies;
 
-
     //static PhaserGame objects
-    var nestGroup;
-    var egg;
-    var nest;
     var iglooGroup;
 
     //stats
@@ -30,14 +26,14 @@ Game = function() {
         timerText = PhaserGame.add.text(16, 42, 'time: ' + timer, { fontSize: '32px', fill: '#000' });
 
         //initialize static PhaserGame objects
-        nestGroup = NestGroup.init(lives);
+        NestGroup.init(lives);
         iglooGroup = IglooGroup.init();
 
         Snowballs.init();
 
         players = Players.init(numberOfPlayers);
 
-        enemies = Enemies.init();
+        enemies = Enemies.init(numberOfPlayers);
 
         PhaserGame.world.bringToTop(Snowballs.snowballGroup);
         
@@ -55,7 +51,7 @@ Game = function() {
 
         PhaserGame.physics.arcade.collide(players, enemies);
         PhaserGame.physics.arcade.collide(players);
-        PhaserGame.physics.arcade.overlap(enemies, nestGroup, loseLife, null, this);
+        PhaserGame.physics.arcade.overlap(enemies, NestGroup.nestGroup, loseLife, null, this);
 
 
         if (lives <= 0) {
@@ -74,7 +70,7 @@ Game = function() {
         Enemies.debug(PhaserGame, enemies);
     }
 
-    function loseLife(enemy, nestGroup) {
+    function loseLife(enemy) {
         enemy.kill();
         livesText.text = 'lives: ' + --lives;
     }
@@ -88,7 +84,7 @@ Game = function() {
     function destroyAll() {
         Players.destroyAll(players);
         enemies.destroy();
-        nestGroup.destroy();
+        NestGroup.destroyAll();
         livesText.destroy();
         timerText.destroy();
         iglooGroup.destroy();

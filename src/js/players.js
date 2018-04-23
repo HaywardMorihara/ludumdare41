@@ -9,13 +9,13 @@ Players = function() {
 
         for (i = 0; i < numberOfPlayers; i++) {
             if (i == 0) {
-                var player = playerGroup.create(i*300, 300, 'penguin-black');
+                var player = playerGroup.create(Main.screenWidth/2 - 100, Main.screenHeight/2 - 100, 'penguin-black');
             } else if (i == 1) {
-                var player = playerGroup.create(i*300, 300, 'penguin-orange');
+                var player = playerGroup.create(Main.screenWidth/2 + 100, Main.screenHeight/2 - 100, 'penguin-orange');
             } else if (i == 2) {
-                var player = playerGroup.create(i*300, 300, 'penguin-blue');
+                var player = playerGroup.create(Main.screenWidth/2 - 100, Main.screenHeight/2 + 100, 'penguin-blue');
             } else {
-                var player = playerGroup.create(i*300, 300, 'penguin-pink');
+                var player = playerGroup.create(Main.screenWidth/2 + 100, Main.screenHeight/2 + 100, 'penguin-pink');
             }
             
             player.playerNumber = i + 1;
