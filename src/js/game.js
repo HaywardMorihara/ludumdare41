@@ -81,7 +81,7 @@ Game = function() {
     }
 
     function destroyAll() {
-        players.destroy();
+        Players.destroyAll(players);
         enemies.destroy();
         nestGroup.destroy();
         livesText.destroy();

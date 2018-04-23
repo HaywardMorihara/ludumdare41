@@ -159,6 +159,18 @@ Players = function() {
         }
     }
 
+    function destroyAll(playerGroup) {
+        if (Controller.gamePads.connected) {
+            playerGroup.forEach(function(player) {
+                console.log("destorying all");
+                var buttonB = Controller.gamePads.getButton(GamePads[player.playerNumber].B);
+                buttonB.onDown.removeAll();
+                buttonB.onUp.removeAll();
+            });
+        }
+        playerGroup.destroy();
+    }
+
     function debug(player) {
         // PhaserGame.debug.body(player);
 
@@ -168,6 +180,7 @@ Players = function() {
     return {
         init: init,
         update: update,
+        destroyAll: destroyAll,
         debug: debug
     }
 }();
