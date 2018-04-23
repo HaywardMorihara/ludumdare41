@@ -133,22 +133,6 @@ Players = function() {
             buttonB.onUp.add(function(){ return buildSnowball(player); }, this);
 
             var buttonA = Controller.gamePads.getButton(GamePads[player.playerNumber].A);
-            buttonA.onUp.add(function(){
-                if (player.snowballAmmo.length != 0){
-                    Snowballs.throwSnowball(player, player.direction);
-                    Audio.playFx("snowball");
-                    updateAmmoText(player);
-                }
-            });
-        }
-        Controller.bKey.onDown.add(function(){ return animateSnowballMaking(player); });
-        Controller.bKey.onUp.add(function(){ return buildSnowball(player); });
-        Controller.spaceKey.onUp.add(function(){ 
-            if (player.snowballAmmo.length != 0){
-                    Snowballs.throwSnowball(player, player.direction);
-                    Audio.playFx("snowball");
-                    updateAmmoText(player);
-                } });
             buttonA.onUp.add(function(){ return playerThrowSnowball(player)});
         }
         Controller.bKey.onDown.add(function(){ return animateSnowballMaking(player); });
@@ -159,7 +143,7 @@ Players = function() {
     function playerThrowSnowball(player) {
         if (player.snowballAmmo.length != 0){
             Snowballs.throwSnowball(player, player.direction);
-            Audio.playFx();
+            Audio.playFx("snowball");
             updateAmmoText(player);
             switch(player.direction) {
                 case DirectionEnum.UP:
