@@ -20,9 +20,10 @@ Enemies = function() {
 		return enemyGroup;
 	}
 
-	function update(enemyGroup) {
+	function update(enemyGroup, timer) {
 		enemyGroup.forEach(function(enemy) {
-			PhaserGame.physics.arcade.moveToXY(enemy, NestGroup.nest.x, NestGroup.nest.y, speed);
+			var currentSpeed = speed + (timer * 0.2);
+			PhaserGame.physics.arcade.moveToXY(enemy, NestGroup.nest.x, NestGroup.nest.y, currentSpeed);
 		})
 	}
 
