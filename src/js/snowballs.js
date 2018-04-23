@@ -14,6 +14,8 @@ Snowballs = function() {
     function createSnowball(player) {
         player.snowball = this.snowballGroup.create(player.x, player.y, 'snowball');
         player.snowball.scale.setTo(.5,.5);
+        player.snowball.checkWorldBounds = true;
+        player.snowball.events.onOutOfBounds.add(destroy, this);
     }
 
     function throwSnowball(player, direction) { 
@@ -31,6 +33,10 @@ Snowballs = function() {
         }
 
         player.snowball = null;
+    }
+
+    function destroy(snowball) {
+        snowball.destroy();
     }
 
 
