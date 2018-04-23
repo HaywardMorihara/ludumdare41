@@ -90,9 +90,11 @@ Menu = function() {
 				debugControllerText.push(PhaserGame.add.text(100,(i-50)*10,"input: "+i,debugControllerTextStyle));
 	    	}
 		}
+		Audio.init();
 	}
 
 	function updateCursorLocation() {
+		Audio.playFx("cursor");
 		if (cursorSelection == CursorSelection.ONE_PLAYER) {
 			cursor.y = onePlayer.y;
 		} else if (cursorSelection == CursorSelection.TWO_PLAYERS) {

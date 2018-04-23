@@ -98,7 +98,6 @@ Game = function() {
     }
 
     function updateCounter() {
-
         timer++;
         timerText.setText('time: ' + timer);
     }
