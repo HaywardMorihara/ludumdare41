@@ -34,7 +34,10 @@ Game = function() {
         enemies = Enemies.init();
 
         PhaserGame.world.bringToTop(Snowballs.snowballGroup);
-    }
+        
+        //start audio
+        Audio.init();
+        Audio.playFx("music");    }
 
     function update() {
         Players.update(players);
@@ -78,13 +81,15 @@ Game = function() {
     }
 
     function destroyAll() {
-        players.destroy();
+        Players.destroyAll(players);
         enemies.destroy();
         nestGroup.destroy();
         livesText.destroy();
         iglooGroup.destroy();
+        Snowballs.snowballGroup.destroy();
 
         Enemies.destroySpawnEvent();
+        Audio.stopFx("music");
     }
 
 

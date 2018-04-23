@@ -16,7 +16,8 @@ Snowballs = function() {
         player.snowball.scale.setTo(.5,.5);
 
         player.snowballAmmo.push(player.snowball);
-
+        player.snowball.checkWorldBounds = true;
+        player.snowball.events.onOutOfBounds.add(destroy, this);
 
     }
 
@@ -37,6 +38,10 @@ Snowballs = function() {
         }
 
         player.snowball = null;
+    }
+
+    function destroy(snowball) {
+        snowball.destroy();
     }
 
 
