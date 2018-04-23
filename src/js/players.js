@@ -93,7 +93,7 @@ Players = function() {
                 if (player.hasSnowball){
                     Snowballs.throwSnowball(player, player.direction, snowballGroup);
                     player.hasSnowball = false;
-                    Audio.playFx();
+                    Audio.playFx("snowball");
                 }
             }
         })

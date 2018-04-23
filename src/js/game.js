@@ -33,6 +33,10 @@ Game = function() {
         players = Players.init(numberOfPlayers, snowballs);
 
         enemies = Enemies.init();
+
+        //start audio
+        Audio.init();
+        Audio.playFx("music");
     }
 
     function update() {
@@ -84,6 +88,7 @@ Game = function() {
         iglooGroup.destroy();
 
         Enemies.destroySpawnEvent();
+        Audio.stopFx("music");
     }
 
 
