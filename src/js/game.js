@@ -97,14 +97,14 @@ Game = function() {
         Enemies.destroySpawnEvent();
 
         PhaserGame.time.events.remove(timeEvent);
+
+        Audio.stopFx("music");
     }
 
     function updateCounter() {
 
         timer++;
         timerText.setText('time: ' + timer);
-
-        Audio.stopFx("music");
     }
 
 
