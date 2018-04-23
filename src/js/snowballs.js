@@ -8,6 +8,7 @@ Snowballs = function() {
         this.snowballGroup = PhaserGame.add.group();
         this.snowballGroup.enableBody = true;
         PhaserGame.physics.enable(this.snowballGroup, Phaser.Physics.ARCADE);
+        Audio.init();
         return this.snowballGroup;
     }
 
@@ -53,7 +54,7 @@ Snowballs = function() {
         snowball.kill();
         enemy.animations.add('flop', [0]);
         enemy.animations.play('flop', 5, false, true);
-
+        Audio.playFx("seal");
     }
 
     function debug(snowball) {

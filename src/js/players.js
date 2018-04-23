@@ -130,7 +130,7 @@ Players = function() {
             buttonA.onUp.add(function(){
                 if (player.snowballAmmo.length != 0){
                     Snowballs.throwSnowball(player, player.direction);
-                    Audio.playFx();
+                    Audio.playFx("snowball");
                     updateAmmoText(player);
                 }
             });
@@ -140,7 +140,7 @@ Players = function() {
         Controller.spaceKey.onUp.add(function(){ 
             if (player.snowballAmmo.length != 0){
                     Snowballs.throwSnowball(player, player.direction);
-                    Audio.playFx();
+                    Audio.playFx("snowball");
                     updateAmmoText(player);
                 } });
     }

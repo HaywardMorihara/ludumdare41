@@ -25,9 +25,10 @@ function preload() {
     PhaserGame.load.spritesheet('hearts', 'assets/sprites/hearts.png', 150, 150);
 
     //Audio
+    PhaserGame.load.audio('cursor', 'assets/audio/cursor.wav');
     PhaserGame.load.audio('music', 'assets/audio/followme.wav');
-    PhaserGame.load.audio('snowball', 'assets/audio/snowball.mp3');
-    PhaserGame.load.audio('penguin-walk', 'assets/audio/cutewalk.wav');
+    PhaserGame.load.audio('snowball', 'assets/audio/snowball2.mp3');
+    PhaserGame.load.audio('seal', 'assets/audio/seal.mp3');
 }
 
 function create() {
