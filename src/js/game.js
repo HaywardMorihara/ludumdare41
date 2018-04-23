@@ -44,7 +44,7 @@ Game = function() {
     function update() {
         Players.update(players);
 
-        Enemies.update(enemies);
+        Enemies.update(enemies, timer);
 
         Snowballs.update(enemies);
 
